@@ -1,0 +1,42 @@
+{
+  "name": "chocominto-nestjs-templates",
+  "version": "1.0.0",
+  "description": "Ready-to-use NestJS backend templates with modern technology stacks",
+  "main": "scripts/create-project.js",
+  "scripts": {
+    "create-project": "node scripts/create-project.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nestjs",
+    "templates",
+    "postgresql",
+    "mongodb",
+    "prisma",
+    "mongoose",
+    "redis",
+    "docker",
+    "backend",
+    "typescript"
+  ],
+  "author": "Chocominto",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelthilich/chocominto-backend-templates.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kelthilich/chocominto-backend-templates/issues"
+  },
+  "homepage": "https://github.com/kelthilich/chocominto-backend-templates#readme",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "inquirer": "^9.2.12",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.1",
+    "fs-extra": "^11.1.1"
+  },
+  "dependencies": {}
+}

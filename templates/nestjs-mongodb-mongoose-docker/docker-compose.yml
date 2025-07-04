@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: nestjs-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER:-nestjs_user}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD:-nestjs_password}
+      MONGO_INITDB_DATABASE: ${DB_NAME:-nestjs_db}
+    ports:
+      - "${DB_PORT:-27017}:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - nestjs-network
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: nestjs-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - nestjs-network
+
+  mongo-express:
+    image: mongo-express:1.0.0
+    container_name: nestjs-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER:-nestjs_user}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD:-nestjs_password}
+      ME_CONFIG_MONGODB_URL: mongodb://${DB_USER:-nestjs_user}:${DB_PASSWORD:-nestjs_password}@mongodb:27017/
+      ME_CONFIG_BASICAUTH: false
+    depends_on:
+      - mongodb
+    networks:
+      - nestjs-network
+
+volumes:
+  mongodb_data:
+  redis_data:
+
+networks:
+  nestjs-network:
+    driver: bridge
